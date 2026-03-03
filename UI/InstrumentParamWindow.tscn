@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c25bnlfh63sjn"]
+
+[ext_resource type="Script" uid="uid://l1f01fc8vta1" path="res://UI/InstrumentParamWindow.cs" id="1_aq62f"]
+
+[node name="InstrumentParamWindow" type="VBoxContainer" unique_id=1239533493]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aq62f")

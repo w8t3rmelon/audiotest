@@ -1,0 +1,225 @@
+using System;
+
+namespace audiotest.Core.AudioEngine
+{
+	public enum InstrumentParameterType
+	{
+		Toggle,
+		Slider,
+		Spin,
+		Knob,
+		String,
+		Invoke
+	}
+	public class InstrumentParameter
+	{
+		public InstrumentParameterType Type;
+
+		public string Name;
+
+		private void ThrowIfNotDoubleType()
+		{
+			if (Type != InstrumentParameterType.Knob && Type != InstrumentParameterType.Slider && Type != InstrumentParameterType.Spin)
+				throw new InvalidOperationException("Parameter type is not Knob, Slider or Spin");
+		}
+
+		private void ThrowIfNotStringType()
+		{
+			if (Type != InstrumentParameterType.String)
+				throw new InvalidOperationException("Parameter type is not String");
+		}
+
+		private void ThrowIfNotBoolType()
+		{
+			if (Type != InstrumentParameterType.Toggle)
+				throw new InvalidOperationException("Parameter type is not Toggle");
+		}
+		private void ThrowIfNotActionType()
+		{
+			if (Type != InstrumentParameterType.Invoke)
+				throw new InvalidOperationException("Parameter type is not Invoke");
+		}
+
+
+		public double DoubleValue
+		{
+			get
+			{
+				ThrowIfNotDoubleType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotDoubleType();
+				field = value;
+			}
+		}
+
+		public double DoubleMin
+		{
+			get
+			{
+				ThrowIfNotDoubleType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotDoubleType();
+				field = value;
+			}
+		}
+		public double DoubleMax
+		{
+			get
+			{
+				ThrowIfNotDoubleType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotDoubleType();
+				field = value;
+			}
+		}
+		public double DoubleStep
+		{
+			get
+			{
+				ThrowIfNotDoubleType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotDoubleType();
+				field = value;
+			}
+		}
+		public double DoubleDefault
+		{
+			get
+			{
+				ThrowIfNotDoubleType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotDoubleType();
+				field = value;
+			}
+		}
+
+
+		public string StringValue
+		{
+			get
+			{
+				ThrowIfNotStringType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotStringType();
+				field = value;
+			}
+		}
+		public string StringDefault
+		{
+			get
+			{
+				ThrowIfNotStringType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotStringType();
+				field = value;
+			}
+		}
+
+
+		public bool BoolValue
+		{
+			get
+			{
+				ThrowIfNotBoolType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotBoolType();
+				field = value;
+			}
+		}
+		public bool BoolDefault
+		{
+			get
+			{
+				ThrowIfNotBoolType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotBoolType();
+				field = value;
+			}
+		}
+
+		public Action Action
+		{
+			get
+			{
+				ThrowIfNotActionType();
+				return field;
+			}
+			set
+			{
+				ThrowIfNotActionType();
+				field = value;
+			}
+		}
+
+		public InstrumentParameter(InstrumentParameterType type, string name, double defaultValue, double min, double max, double step)
+		{
+			Type = type;
+			ThrowIfNotDoubleType();
+			Name = name;
+
+			DoubleDefault = defaultValue;
+			DoubleMin = min;
+			DoubleMax = max;
+			DoubleStep = step;
+
+			DoubleValue = defaultValue;
+		}
+
+		public InstrumentParameter(InstrumentParameterType type, string name, bool defaultValue)
+		{
+			Type = type;
+			ThrowIfNotBoolType();
+            Name = name;
+
+            BoolDefault = defaultValue;
+
+			BoolValue = defaultValue;
+		}
+
+		public InstrumentParameter(InstrumentParameterType type, string name, string defaultValue)
+		{
+			Type = type;
+			ThrowIfNotStringType();
+            Name = name;
+
+            StringDefault = defaultValue;
+
+			StringValue = defaultValue;
+		}
+
+		public InstrumentParameter(InstrumentParameterType type, string name, Action action)
+		{
+			Type = type;
+			ThrowIfNotActionType();
+            Name = name;
+            Action = action;
+		}
+	}
+}

@@ -1,0 +1,424 @@
+[gd_scene format=3 uid="uid://cn3jcbcc65idn"]
+
+[ext_resource type="Script" uid="uid://gpaj35bp5wmx" path="res://UI/MainController.cs" id="1_7mycd"]
+[ext_resource type="Script" uid="uid://p8qayuiutjwo" path="res://UI/MenuBar.cs" id="2_272bh"]
+[ext_resource type="Script" uid="uid://cmoald3tx4rci" path="res://UI/TimePanel.cs" id="3_5vw27"]
+[ext_resource type="Script" uid="uid://dwe2cr75wd61m" path="res://UI/Oscilloscope.cs" id="3_272bh"]
+[ext_resource type="FontFile" uid="uid://dhvorp0awqhd5" path="res://Assets/Fonts/Hack-Regular.ttf" id="5_5vw27"]
+[ext_resource type="Script" uid="uid://bhukf75im30ye" path="res://addons/extendedcontrols/Knob.cs" id="6_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://bglami7jgtq8d" path="res://Assets/pattern.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://bo35t2mcl8tra" path="res://Assets/runningman.png" id="8_kek77"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.54, 0.23400001, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4c57u"]
+atlas = ExtResource("8_kek77")
+region = Rect2(0, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efxa6"]
+atlas = ExtResource("8_kek77")
+region = Rect2(95, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg77c"]
+atlas = ExtResource("8_kek77")
+region = Rect2(190, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycdy4"]
+atlas = ExtResource("8_kek77")
+region = Rect2(285, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w48qg"]
+atlas = ExtResource("8_kek77")
+region = Rect2(380, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vivmo"]
+atlas = ExtResource("8_kek77")
+region = Rect2(475, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cqfq"]
+atlas = ExtResource("8_kek77")
+region = Rect2(570, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaehf"]
+atlas = ExtResource("8_kek77")
+region = Rect2(665, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_074og"]
+atlas = ExtResource("8_kek77")
+region = Rect2(760, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cegan"]
+atlas = ExtResource("8_kek77")
+region = Rect2(855, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82xsv"]
+atlas = ExtResource("8_kek77")
+region = Rect2(950, 0, 95, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
+atlas = ExtResource("8_kek77")
+region = Rect2(1045, 0, 95, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_82xsv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4c57u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efxa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg77c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycdy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w48qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vivmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaehf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cegan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82xsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_getpj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Main" type="Control" unique_id=1150911420]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7mycd")
+
+[node name="TopBar" type="Panel" parent="." unique_id=1465504662]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="MenuBar" type="MenuBar" parent="TopBar" unique_id=1413712825]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+flat = true
+script = ExtResource("2_272bh")
+
+[node name="File" type="PopupMenu" parent="TopBar/MenuBar" unique_id=2059946927]
+oversampling_override = 1.0
+title = "File"
+size = Vector2i(265, 100)
+item_count = 4
+item_0/text = "No project saving yet, sorry :("
+item_0/id = 3
+item_0/disabled = true
+item_1/text = "Export WAV..."
+item_1/id = 0
+item_2/id = 1
+item_2/separator = true
+item_3/text = "Exit"
+item_3/id = 2
+
+[node name="Edit" type="PopupMenu" parent="TopBar/MenuBar" unique_id=858064591]
+oversampling_override = 1.0
+item_count = 1
+item_0/id = 0
+
+[node name="Pattern" type="PopupMenu" parent="TopBar/MenuBar" unique_id=2017682690]
+
+[node name="Instrument" type="PopupMenu" parent="TopBar/MenuBar" unique_id=1491496677]
+oversampling_override = 1.0
+size = Vector2i(167, 100)
+
+[node name="New" type="PopupMenu" parent="TopBar/MenuBar/Instrument" unique_id=59672198]
+oversampling_override = 1.0
+
+[node name="Window" type="PopupMenu" parent="TopBar/MenuBar" unique_id=71591773]
+oversampling_override = 1.0
+size = Vector2i(117, 100)
+item_count = 1
+item_0/text = "Piano Roll"
+item_0/id = 0
+
+[node name="Help" type="PopupMenu" parent="TopBar/MenuBar" unique_id=168524186]
+item_count = 1
+item_0/text = "You're on your own for now"
+item_0/id = 0
+item_0/disabled = true
+
+[node name="Oscilloscope" type="Panel" parent="TopBar" unique_id=1165202797]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.85
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.9
+offset_right = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("3_272bh")
+
+[node name="Left" type="Line2D" parent="TopBar/Oscilloscope" unique_id=54293705]
+points = PackedVector2Array(0, 25.6, 164.8, 25.6)
+width = 1.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="Right" type="Line2D" parent="TopBar/Oscilloscope" unique_id=2069669345]
+points = PackedVector2Array(0, 25.6, 164.8, 25.6)
+width = 1.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Timer" type="Timer" parent="TopBar/Oscilloscope" unique_id=1416338414]
+
+[node name="Time" type="Panel" parent="TopBar" unique_id=1827962732]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.1
+anchor_right = 0.85
+anchor_bottom = 0.9
+offset_right = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("3_5vw27")
+
+[node name="Label" type="Label" parent="TopBar/Time" unique_id=837398188]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_5vw27")
+theme_override_font_sizes/font_size = 24
+text = "00:00.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="TopBar" unique_id=925324287]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.65
+anchor_top = 0.1
+anchor_right = 0.7
+anchor_bottom = 0.9
+offset_right = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+toggle_mode = true
+text = "Play"
+
+[node name="StopButton" type="Button" parent="TopBar" unique_id=1836855793]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6
+anchor_top = 0.1
+anchor_right = 0.65
+anchor_bottom = 0.9
+offset_right = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Stop"
+
+[node name="BPMInput" type="SpinBox" parent="TopBar" unique_id=563684561]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.6
+anchor_bottom = 0.9
+offset_right = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 2048.0
+value = 120.0
+alignment = 1
+suffix = "BPM"
+
+[node name="VolumeKnob" type="Range" parent="TopBar" unique_id=1937714307]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+pivot_offset_ratio = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = null
+theme_type_variation = &""
+min_value = 0.0
+max_value = 100.0
+step = 5.0
+page = 0.0
+value = 100.0
+exp_edit = false
+rounded = false
+allow_greater = false
+allow_lesser = false
+script = ExtResource("6_2cqfq")
+metadata/_custom_type_script = "uid://bhukf75im30ye"
+
+[node name="Label" type="Label" parent="TopBar/VolumeKnob" unique_id=1682868985]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 8
+text = "Vol"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ActualMain" type="Control" parent="." unique_id=1149159595]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pattern" type="TextureRect" parent="ActualMain" unique_id=1476733425]
+modulate = Color(0.14767182, 0.14767182, 0.14767176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_5vw27")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="InstrumentPaneBackground" type="Panel" parent="ActualMain" unique_id=2043726704]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 256.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
+
+[node name="InstrumentPane" type="VBoxContainer" parent="ActualMain" unique_id=940166366]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 256.0
+grow_vertical = 2
+
+[node name="PatternPaneBackground" type="Panel" parent="ActualMain" unique_id=394855808]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PatternPane" type="VBoxContainer" parent="ActualMain" unique_id=1455011989]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RunningMan" type="AnimatedSprite2D" parent="." unique_id=1724864827]
+position = Vector2(1082, 138)
+sprite_frames = SubResource("SpriteFrames_82xsv")

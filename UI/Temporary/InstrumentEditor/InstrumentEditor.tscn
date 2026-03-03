@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dyosiagwljsqp"]
+
+[ext_resource type="Script" uid="uid://bqnswtbdauwqc" path="res://UI/Temporary/InstrumentEditor/InstrumentEditor.cs" id="1_38ixv"]
+[ext_resource type="PackedScene" uid="uid://p6q0qcndkqgw" path="res://UI/Temporary/InstrumentEditor/InstrumentPlayground.tscn" id="1_e6xa5"]
+[ext_resource type="PackedScene" uid="uid://djiberr8erh2s" path="res://UI/ADSREditor.tscn" id="2_38ixv"]
+[ext_resource type="PackedScene" uid="uid://c25bnlfh63sjn" path="res://UI/InstrumentParamWindow.tscn" id="3_uyw4b"]
+
+[node name="InstrumentEditor" type="Control" unique_id=1917634150]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_38ixv")
+
+[node name="Title" type="Label" parent="." unique_id=10951176]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "instrument: name? (id?)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tabs" type="TabContainer" parent="." unique_id=1793615834]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Playground" parent="Tabs" unique_id=1622095755 instance=ExtResource("1_e6xa5")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Parameters" parent="Tabs" unique_id=1239533493 instance=ExtResource("3_uyw4b")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Envelope" parent="Tabs" unique_id=940363984 instance=ExtResource("2_38ixv")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

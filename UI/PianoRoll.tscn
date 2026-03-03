@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://b7j2vtpo3odcf"]
+
+[ext_resource type="Script" uid="uid://cioudsipoms23" path="res://UI/PianoRollWindow.cs" id="1_1qhay"]
+[ext_resource type="Script" uid="uid://cw18sguyndwce" path="res://UI/PianoRoll.cs" id="2_m43c6"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_gqjnr"]
+
+[node name="PianoRollWindow" type="Control" unique_id=1605096398]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1qhay")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=586696411]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.17355001, 0.17355004, 0.17355001, 1)
+
+[node name="PianoRoll" type="Control" parent="." unique_id=328062470]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_m43c6")
+HMaxScroll = 0.0
+
+[node name="Toolbar" type="Control" parent="." unique_id=1947360584]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+
+[node name="SnapToOption" type="SpinBox" parent="Toolbar" unique_id=1411202287]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_right = 192.0
+grow_vertical = 2
+min_value = 1.0
+max_value = 64.0
+value = 4.0
+rounded = true
+alignment = 1
+prefix = "1 /"
+suffix = "beat"
+
+[node name="Label" type="Label" parent="Toolbar" unique_id=639096821]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 72.0
+grow_vertical = 2
+text = "Snap To"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DrawMode" type="Button" parent="Toolbar" unique_id=1372979073]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 216.0
+offset_right = 264.0
+grow_vertical = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_gqjnr")
+text = "D"
+text_overrun_behavior = 1
+
+[node name="EraseMode" type="Button" parent="Toolbar" unique_id=872877093]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 264.0
+offset_right = 312.0
+grow_vertical = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_gqjnr")
+text = "E"
+text_overrun_behavior = 1
+
+[node name="SelectMode" type="Button" parent="Toolbar" unique_id=1169357698]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 312.0
+offset_right = 360.0
+grow_vertical = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_gqjnr")
+text = "S"
+text_overrun_behavior = 1
+
+[node name="Send" type="Button" parent="Toolbar" unique_id=385652906]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 11.0
+offset_right = 537.0
+offset_bottom = 42.0
+text = "send pattern (TEMP)"

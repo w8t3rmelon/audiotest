@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://djiberr8erh2s"]
+
+[ext_resource type="Script" uid="uid://cknwgnw7mylkg" path="res://UI/ADSREditor.cs" id="1_rvptt"]
+
+[node name="AdsrEditor" type="Control" unique_id=940363984 node_paths=PackedStringArray("Graph", "Attack", "Decay", "Sustain", "Release")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rvptt")
+Graph = NodePath("Line2D")
+Attack = NodePath("Panel/VBoxContainer/AttackSlider")
+Decay = NodePath("Panel/VBoxContainer/DecaySlider")
+Sustain = NodePath("Panel/VBoxContainer/SustainSlider")
+Release = NodePath("Panel/VBoxContainer/ReleaseSlider")
+
+[node name="Panel2" type="Panel" parent="." unique_id=931922886]
+modulate = Color(0.3854925, 0.38549247, 0.38549247, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 192.0
+grow_horizontal = 2
+
+[node name="Line2D" type="Line2D" parent="." unique_id=482185591]
+points = PackedVector2Array(0, 192, 0, 0, 576, 0, 1152, 0)
+width = 5.0
+default_color = Color(0, 0.27450982, 1, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=874012931]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=303033461]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=1669523914]
+layout_mode = 2
+text = "Attack"
+
+[node name="AttackSlider" type="HSlider" parent="Panel/VBoxContainer" unique_id=363002629]
+layout_mode = 2
+max_value = 4.0
+step = 0.25
+tick_count = 16
+ticks_position = 3
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer" unique_id=1777159652]
+layout_mode = 2
+text = "Decay"
+
+[node name="DecaySlider" type="HSlider" parent="Panel/VBoxContainer" unique_id=478561557]
+layout_mode = 2
+max_value = 4.0
+step = 0.25
+tick_count = 16
+ticks_position = 3
+
+[node name="Label3" type="Label" parent="Panel/VBoxContainer" unique_id=272588774]
+layout_mode = 2
+text = "Sustain"
+
+[node name="SustainSlider" type="HSlider" parent="Panel/VBoxContainer" unique_id=359802376]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+tick_count = 25
+ticks_position = 3
+
+[node name="Label4" type="Label" parent="Panel/VBoxContainer" unique_id=1133708998]
+layout_mode = 2
+text = "Release"
+
+[node name="ReleaseSlider" type="HSlider" parent="Panel/VBoxContainer" unique_id=574234887]
+layout_mode = 2
+max_value = 4.0
+step = 0.25
+tick_count = 16
+ticks_position = 3

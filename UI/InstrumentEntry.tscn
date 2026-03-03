@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://crmjfm0ukbvas"]
+
+[ext_resource type="Script" uid="uid://bcmic37gks1cv" path="res://UI/InstrumentEntry.cs" id="1_6ty7x"]
+
+[node name="Instrument" type="Panel" unique_id=1688956218]
+custom_minimum_size = Vector2(0, 96)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ty7x")
+
+[node name="Inner" type="Control" parent="." unique_id=2017578111]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="Inner" unique_id=332946618]
+layout_mode = 1
+offset_right = 165.0
+offset_bottom = 23.0
+text = "awesome instrument"
+
+[node name="Options" type="Button" parent="Inner" unique_id=602589942]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -22.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "..."
+
+[node name="Menu" type="PopupMenu" parent="Inner/Options" unique_id=6834831]
+oversampling_override = 1.0
+item_count = 2
+item_0/text = "edit"
+item_0/id = 0
+item_1/text = "destroy"
+item_1/id = 1
+
+[node name="Volume" type="HSlider" parent="Inner" unique_id=900014776]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 1.0
+step = 0.05
+value = 1.0

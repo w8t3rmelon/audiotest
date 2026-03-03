@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dtrjre3mr8gbn"]
+
+[node name="PatternEntry" type="Button" unique_id=2039534433]
+custom_minimum_size = Vector2(49, 0)
+offset_right = 49.0
+offset_bottom = 8.0
+
+[node name="Active" type="ColorRect" parent="." unique_id=858193427]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.37, 0.46450007, 1, 1)
+
+[node name="Label" type="Label" parent="." unique_id=979886874]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

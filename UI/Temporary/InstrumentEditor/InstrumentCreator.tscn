@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bdfeanjk38xse"]
+
+[ext_resource type="Script" uid="uid://bkonl8ugd8fch" path="res://Temporary/InstrumentEditor/InstrumentCreator.cs" id="1_ud0wj"]
+
+[node name="InstrumentCreator" type="Control" unique_id=1571190956 node_paths=PackedStringArray("AddTestInstrumentButton", "AddSamplerInstrumentButton", "DestroyButton", "EditButton", "IdInput", "InstrumentList")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ud0wj")
+AddTestInstrumentButton = NodePath("AddTestInstrumentButton")
+AddSamplerInstrumentButton = NodePath("AddSamplerInstrumentButton")
+DestroyButton = NodePath("DestroyButton")
+EditButton = NodePath("EditButton")
+IdInput = NodePath("IdInput")
+InstrumentList = NodePath("InstrumentList")
+
+[node name="AddTestInstrumentButton" type="Button" parent="." unique_id=606870828]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 31.0
+offset_right = 304.0
+offset_bottom = 62.0
+text = "add test instrument"
+
+[node name="AddSamplerInstrumentButton" type="Button" parent="." unique_id=1672113831]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 71.0
+offset_right = 462.0
+offset_bottom = 102.0
+text = "add sampler instrument"
+
+[node name="DestroyButton" type="Button" parent="." unique_id=2070779131]
+layout_mode = 0
+offset_left = 48.0
+offset_right = 115.0
+offset_bottom = 31.0
+text = "destroy"
+
+[node name="EditButton" type="Button" parent="." unique_id=396700977]
+layout_mode = 0
+offset_left = 125.0
+offset_right = 172.0
+offset_bottom = 31.0
+text = "edit"
+
+[node name="IdInput" type="LineEdit" parent="." unique_id=289238640]
+layout_mode = 0
+offset_top = 36.0
+offset_right = 207.0
+offset_bottom = 67.0
+
+[node name="SamplePathInput" type="LineEdit" parent="." unique_id=627246573]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 103.0
+offset_right = 472.0
+offset_bottom = 134.0
+placeholder_text = "sample path"
+
+[node name="InstrumentList" type="Label" parent="." unique_id=1426437781]
+layout_mode = 0
+offset_top = 78.0
+offset_right = 40.0
+offset_bottom = 101.0
+text = "..."
