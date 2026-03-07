@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using audiotest.Core.AudioEngine;
 
 namespace audiotest.Core.Sequencing
@@ -10,6 +10,7 @@ namespace audiotest.Core.Sequencing
     {
         public Instrument? Instrument;
         public List<PatternNote> Notes;
+        public List<PatternEvent> Events;
 
         public double MaxBars = 4.0;
 
@@ -17,8 +18,15 @@ namespace audiotest.Core.Sequencing
         {
             Instrument = inst;
             Notes = new();
+            Events = new();
         }
 
+        public void ReorderEvents()
+        {
+            Events = Events.OrderBy(e => e.Time).ToList();
+        }
+
+        [Obsolete("Pattern playback will soon be moved to the Conductor rendering this function useless in the near future")]
         public void SendNotesToInstrument()
         {
             if (Instrument is null) throw new InvalidOperationException("instrument is null");
