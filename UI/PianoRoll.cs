@@ -96,14 +96,14 @@ public partial class PianoRoll : Control
 
     public byte NoteUnderCursor
 	{
-		get => (byte)(128 - Math.Floor((GetLocalMousePosition().Y + ScrollOffset) / KeySize));
+		get => (byte)(127 - Math.Floor((GetLocalMousePosition().Y + ScrollOffset) / KeySize));
 	}
 
 	public bool CanPlaceNote
 	{
 		get => 
 			PositionUnderCursor >= 0 && 
-			NoteUnderCursor <= 128 && 
+			NoteUnderCursor <= 127 && 
 			NoteUnderCursor >= 0 &&
 			(PositionUnderCursor / Snap / _npb) + LastLength <= Pattern.MaxBars && 
 			!ActuallyModifyingNote &&
@@ -350,7 +350,7 @@ public partial class PianoRoll : Control
 		Vector2 pos =
 			new Vector2(
 				(float)((note.Position * npb * (HSpaceBetweenSteps * HZoomFactor)) + KeyHSize - HScrollOffset),
-				(float)((128 - note.Note.Number) * KeySize) - (ScrollOffset)
+				(float)((127 - note.Note.Number) * KeySize) - (ScrollOffset)
 			);
 
 		Vector2 size = 
@@ -447,7 +447,7 @@ public partial class PianoRoll : Control
         {
             // calculate max scroll for x axis
             MaxScroll = 0;
-			for (byte i = 128; i > 0; i--)
+			for (byte i = 127; i > 0; i--)
 			{
 				Note note = new Note { Number = i };
 				MaxScroll += note.Accidental ? AccidentalVSize : KeySize;
@@ -506,7 +506,7 @@ public partial class PianoRoll : Control
 			}
 		}
 
-		for (byte i = 128; i > 0; i--)
+		for (byte i = 127; i > 0; i--)
 		{
 			Note? note = new Note { Number = i };
 			if (advance > ScrollOffset - KeySize && advance < Size.Y + ScrollOffset)
