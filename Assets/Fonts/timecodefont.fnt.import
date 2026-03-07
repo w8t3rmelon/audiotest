@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://b0x2hoc56jy5e"
+path="res://.godot/imported/timecodefont.fnt-71f70ad319a7e76e3d4b52ca43ee1735.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/timecodefont.fnt"
+dest_files=["res://.godot/imported/timecodefont.fnt-71f70ad319a7e76e3d4b52ca43ee1735.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

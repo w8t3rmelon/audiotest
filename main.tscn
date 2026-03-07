@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://p8qayuiutjwo" path="res://UI/MenuBar.cs" id="2_272bh"]
 [ext_resource type="Script" uid="uid://cmoald3tx4rci" path="res://UI/TimePanel.cs" id="3_5vw27"]
 [ext_resource type="Script" uid="uid://dwe2cr75wd61m" path="res://UI/Oscilloscope.cs" id="3_272bh"]
-[ext_resource type="FontFile" uid="uid://dhvorp0awqhd5" path="res://Assets/Fonts/Hack-Regular.ttf" id="5_5vw27"]
+[ext_resource type="FontFile" uid="uid://b0x2hoc56jy5e" path="res://Assets/Fonts/timecodefont.fnt" id="5_5vw27"]
 [ext_resource type="Script" uid="uid://bhukf75im30ye" path="res://addons/extendedcontrols/Knob.cs" id="6_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bglami7jgtq8d" path="res://Assets/pattern.png" id="7_5vw27"]
 [ext_resource type="Texture2D" uid="uid://bo35t2mcl8tra" path="res://Assets/runningman.png" id="8_kek77"]
@@ -126,14 +126,14 @@ script = ExtResource("1_7mycd")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 64.0
+offset_bottom = 48.0
 grow_horizontal = 2
 
 [node name="MenuBar" type="MenuBar" parent="TopBar" unique_id=1413712825]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 31.0
+offset_bottom = 48.0
 grow_horizontal = 2
 flat = true
 script = ExtResource("2_272bh")
@@ -193,12 +193,12 @@ grow_vertical = 2
 script = ExtResource("3_272bh")
 
 [node name="Left" type="Line2D" parent="TopBar/Oscilloscope" unique_id=54293705]
-points = PackedVector2Array(0, 25.6, 164.8, 25.6)
+points = PackedVector2Array(0, 19.2, 164.8, 19.2)
 width = 1.0
 default_color = Color(1, 0, 0, 1)
 
 [node name="Right" type="Line2D" parent="TopBar/Oscilloscope" unique_id=2069669345]
-points = PackedVector2Array(0, 25.6, 164.8, 25.6)
+points = PackedVector2Array(0, 19.2, 164.8, 19.2)
 width = 1.0
 default_color = Color(0, 1, 0, 1)
 
@@ -224,7 +224,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_5vw27")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 16
 text = "00:00.00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -370,7 +370,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 64.0
+offset_top = 48.0
 grow_horizontal = 2
 grow_vertical = 2
 
