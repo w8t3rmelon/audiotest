@@ -47,6 +47,8 @@ namespace audiotest.UI
             slider.Step = parm.DoubleStep;
             slider.Value = parm.DoubleValue;
 
+            slider.SizeFlagsHorizontal = SizeFlags.ExpandFill;
+
             label.Text = parm.Name;
 
             slider.ValueChanged += (val) =>
