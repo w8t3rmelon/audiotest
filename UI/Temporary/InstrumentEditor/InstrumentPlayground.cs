@@ -12,21 +12,26 @@ namespace audiotest.UI.Temporary.InstrumentEditor
 		[Export] public Label NoteNumberLabel;
 		[Export] public SpinBox NoteNumberInput;
 
-		[Export] public SpinBox BeatNumberInput;
-		[Export] public SpinBox BeatLengthNumberInput;
+		//[Export] public SpinBox BeatNumberInput;
+		//[Export] public SpinBox BeatLengthNumberInput;
 
 		[Export] public Slider VelocitySlider;
 
 		[Export] public Button EmitButton;
-		[Export] public Button ScheduleForButton;
-		[Export] public Button ClearQueueButton;
+		//[Export] public Button ScheduleForButton;
+		//[Export] public Button ClearQueueButton;
 		[Export] public Button PanicButton;
 
 		public override void _Ready()
 		{
 			EmitButton.ButtonDown += () => {
 				UI.MainController.Instance.Mixer.TryOpenPreviewClock();
-                Instrument.SendEventNow(
+                Instrument.SendSeqEvent(
+	                MainController.Instance.Mixer.PreviewClock,
+	                SeqEvent.NoteOn(0, (byte)VelocitySlider.Value, (byte)NoteNumberInput.Value)
+	            );
+				/*
+				Instrument.SendEventNow(
 					UI.MainController.Instance.Mixer.PreviewClock,
 					new NoteEvent(
 						new Note { Number = (byte)NoteNumberInput.Value },
@@ -34,8 +39,14 @@ namespace audiotest.UI.Temporary.InstrumentEditor
 						true
 					)
 				);
+				*/
 			};
 			EmitButton.ButtonUp += () => {
+				Instrument.SendSeqEvent(
+					MainController.Instance.Mixer.PreviewClock,
+					SeqEvent.NoteOff(0, (byte)VelocitySlider.Value, (byte)NoteNumberInput.Value)
+				);
+				/*
 				Instrument.SendEventNow(
 					UI.MainController.Instance.Mixer.Clock,
 					new NoteEvent(
@@ -44,7 +55,10 @@ namespace audiotest.UI.Temporary.InstrumentEditor
 						false
 					)
 				);
+				*/
 			};
+			
+			/*
 			ScheduleForButton.Pressed += () => {
 				Instrument.ScheduleNote(
 					UI.MainController.Instance.Mixer.Clock.TimeFromBeat(0, BeatNumberInput.Value),
@@ -67,6 +81,8 @@ namespace audiotest.UI.Temporary.InstrumentEditor
 			{
 				Instrument.EventQueue.Clear();
 			};
+			*/
+			
 			PanicButton.Pressed += () =>
 			{
 				Instrument.Channels.Clear();

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://p6q0qcndkqgw"]
 
-[ext_resource type="Script" uid="uid://bkygn42swxlb3" path="res://Temporary/InstrumentEditor/InstrumentPlayground.cs" id="1_tv310"]
+[ext_resource type="Script" uid="uid://bkygn42swxlb3" path="res://UI/Temporary/InstrumentEditor/InstrumentPlayground.cs" id="1_tv310"]
 
 [node name="InstrumentPlayground" type="Control" unique_id=1622095755 node_paths=PackedStringArray("NoteNumberLabel", "NoteNumberInput", "BeatNumberInput", "BeatLengthNumberInput", "VelocitySlider", "EmitButton", "ScheduleForButton", "ClearQueueButton", "PanicButton")]
 layout_mode = 3
@@ -12,12 +12,12 @@ grow_vertical = 2
 script = ExtResource("1_tv310")
 NoteNumberLabel = NodePath("NoteNumberLabel")
 NoteNumberInput = NodePath("NoteNumber")
-BeatNumberInput = NodePath("BeatNumber")
-BeatLengthNumberInput = NodePath("BeatLengthNumber")
+BeatNumberInput = NodePath("")
+BeatLengthNumberInput = NodePath("")
 VelocitySlider = NodePath("Velocity")
 EmitButton = NodePath("EmitButton")
-ScheduleForButton = NodePath("ScheduleForButton")
-ClearQueueButton = NodePath("ClearQueueButton")
+ScheduleForButton = NodePath("")
+ClearQueueButton = NodePath("")
 PanicButton = NodePath("PanicButton")
 
 [node name="NoteNumber" type="SpinBox" parent="." unique_id=443612226]
@@ -26,29 +26,6 @@ offset_top = 24.0
 offset_right = 86.5
 offset_bottom = 55.0
 max_value = 127.0
-
-[node name="BeatNumber" type="SpinBox" parent="." unique_id=2033592]
-layout_mode = 0
-offset_left = 138.0
-offset_top = 207.0
-offset_right = 255.0
-offset_bottom = 238.0
-max_value = 0.0
-step = 0.25
-allow_greater = true
-prefix = "Beat#"
-
-[node name="BeatLengthNumber" type="SpinBox" parent="." unique_id=1298291126]
-layout_mode = 0
-offset_left = 258.0
-offset_top = 207.0
-offset_right = 402.0
-offset_bottom = 238.0
-max_value = 0.0
-step = 0.25
-allow_greater = true
-prefix = "for"
-suffix = "beats"
 
 [node name="NoteNumberLabel" type="Label" parent="." unique_id=1662366439]
 layout_mode = 0
@@ -77,31 +54,15 @@ rounded = true
 [node name="EmitButton" type="Button" parent="." unique_id=2088293027]
 layout_mode = 0
 offset_left = 24.0
-offset_top = 170.0
-offset_right = 197.0
-offset_bottom = 201.0
-text = "Emit NoteEvent Now!"
-
-[node name="ScheduleForButton" type="Button" parent="." unique_id=46919741]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 207.0
-offset_right = 132.0
-offset_bottom = 238.0
-text = "Schedule At"
-
-[node name="ClearQueueButton" type="Button" parent="." unique_id=515083453]
-layout_mode = 0
-offset_left = 24.0
 offset_top = 96.0
-offset_right = 171.0
+offset_right = 283.0
 offset_bottom = 127.0
-text = "Clear EventQueue"
+text = "Send SeqEvent: NoteOn/NoteOff"
 
 [node name="PanicButton" type="Button" parent="." unique_id=565003591]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 133.0
-offset_right = 171.0
+offset_right = 88.0
 offset_bottom = 164.0
 text = "PANIC!"

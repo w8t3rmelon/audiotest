@@ -1,9 +1,11 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using audiotest.Core.Sequencing;
+using audiotest.Core.Sequencing.EventData;
 
 namespace audiotest.Core.AudioEngine
 {
@@ -25,7 +27,13 @@ namespace audiotest.Core.AudioEngine
         public Dictionary<string, InstrumentParameter> Params { get; init; }
 
         public Dictionary<byte, NoteState> Channels = new Dictionary<byte, NoteState>();
+        
+        /*
+         * TODO: part of legacy EventQueue-based sequencing; remove as part
+         * of transition to the new Conductor-based system
+         */
         public Dictionary<uint, NoteEvent> EventQueue = new Dictionary<uint, NoteEvent>();
+        
         private bool _disposed;
 
         public List<Pattern> Patterns = new();
@@ -38,10 +46,15 @@ namespace audiotest.Core.AudioEngine
             Params = new();
         }
 
+        /*
+         * TODO: part of legacy EventQueue-based sequencing; remove as part
+         * of transition to the new Conductor-based system
+         */
         public void ScheduleNote(uint Time, NoteEvent e)
         {
             EventQueue[Time] = e;
         }
+        
         public double AmplitudeAt(double time, NoteState state)
         {
             if (state.Event.Pressed)
@@ -60,6 +73,42 @@ namespace audiotest.Core.AudioEngine
             }
         }
 
+        public void SendSeqEvent(Clock clock, SeqEvent e)
+        {
+            switch (e.Type)
+            {
+                case SeqEventType.NoteOn:
+                    if (true) {
+                        NoteData data = e.GetNoteData();
+                        Channels[data.Note] = new NoteState
+                        {
+                            Event = new NoteEvent { Note = new Note(data.Note), Velocity = data.Velocity, Pressed = true },
+                            StartTime = clock.Time
+                        };
+                    }
+                    break;
+                case SeqEventType.NoteOff:
+                    // i can't define a variable with the same name in different cases???
+                    if (true)
+                    {
+                        NoteData data = e.GetNoteData();
+                        Channels[data.Note] = new NoteState
+                        {
+                            Event = new NoteEvent { Note = new Note(data.Note), Velocity = data.Velocity, Pressed = false },
+                            StartTime = clock.Time
+                        };
+                    }
+                    break;
+                default:
+                    Debug.WriteLine($"unsupported event {e.Type}");
+                    break;
+            }
+        }
+
+        /*
+         * TODO: part of legacy EventQueue-based sequencing; remove as part
+         * of transition to the new Conductor-based system
+         */
         public void SendEventNow(Clock clock, NoteEvent e)
         {
             if (!Channels.ContainsKey(e.Note.Number) && !e.Pressed) { }
@@ -73,6 +122,10 @@ namespace audiotest.Core.AudioEngine
 
         public Vector2 GetSample(Clock clock)
         {
+            /*
+             * TODO: part of legacy EventQueue-based sequencing; remove as part
+             * of transition to the new Conductor-based system
+             */
             if (EventQueue.ContainsKey(clock.Time))
             {
                 NoteEvent e = EventQueue[clock.Time];
