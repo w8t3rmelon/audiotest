@@ -199,6 +199,8 @@ namespace audiotest.UI
 
             foreach (KeyValuePair<string, InstrumentParameter> pair in Instrument.Params)
             {
+                if (pair.Value.Hidden) continue;
+                
                 if (pair.Value.Type == InstrumentParameterType.Toggle)
                     MakeToggle(pair.Value);
                 else if (pair.Value.Type == InstrumentParameterType.Slider)

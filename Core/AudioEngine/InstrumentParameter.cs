@@ -16,6 +16,7 @@ namespace audiotest.Core.AudioEngine
 		public InstrumentParameterType Type;
 
 		public string Name;
+		public bool Hidden;
 
 		private void ThrowIfNotDoubleType()
 		{
@@ -178,10 +179,11 @@ namespace audiotest.Core.AudioEngine
 			}
 		}
 
-		public InstrumentParameter(InstrumentParameterType type, string name, double defaultValue, double min, double max, double step)
+		public InstrumentParameter(InstrumentParameterType type, string name, double defaultValue, double min, double max, double step, bool hidden = false)
 		{
 			Type = type;
 			ThrowIfNotDoubleType();
+			Hidden = hidden;
 			Name = name;
 
 			DoubleDefault = defaultValue;
@@ -192,10 +194,11 @@ namespace audiotest.Core.AudioEngine
 			DoubleValue = defaultValue;
 		}
 
-		public InstrumentParameter(InstrumentParameterType type, string name, bool defaultValue)
+		public InstrumentParameter(InstrumentParameterType type, string name, bool defaultValue, bool hidden = false)
 		{
 			Type = type;
 			ThrowIfNotBoolType();
+			Hidden = hidden;
             Name = name;
 
             BoolDefault = defaultValue;
@@ -203,10 +206,11 @@ namespace audiotest.Core.AudioEngine
 			BoolValue = defaultValue;
 		}
 
-		public InstrumentParameter(InstrumentParameterType type, string name, string defaultValue)
+		public InstrumentParameter(InstrumentParameterType type, string name, string defaultValue, bool hidden = false)
 		{
 			Type = type;
 			ThrowIfNotStringType();
+			Hidden = hidden;
             Name = name;
 
             StringDefault = defaultValue;
@@ -214,10 +218,11 @@ namespace audiotest.Core.AudioEngine
 			StringValue = defaultValue;
 		}
 
-		public InstrumentParameter(InstrumentParameterType type, string name, Action action)
+		public InstrumentParameter(InstrumentParameterType type, string name, Action action, bool hidden = false)
 		{
 			Type = type;
 			ThrowIfNotActionType();
+			Hidden = hidden;
             Name = name;
             Action = action;
 		}
