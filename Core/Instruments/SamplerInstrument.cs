@@ -108,12 +108,12 @@ namespace audiotest.Core.Instruments
                 };
 
 				OS.Alert("sample loaded successfully!", "sampler");
+
+				Ready = true;
             } catch (Exception e)
             {
                 OS.Alert($"error loading sample:\n{e}", "sampler");
             }
-
-			Ready = true;
 		}
 
 		public override Vector2 GetNoteSample(Clock clock, ref NoteState state)
