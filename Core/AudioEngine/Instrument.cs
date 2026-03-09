@@ -13,6 +13,7 @@ namespace audiotest.Core.AudioEngine
     {
         public NoteEvent Event;
         public uint StartTime;
+        public uint InternalStartTime;
         public double? ReleaseTime;
         public bool ToBeDestroyed;
     }
@@ -90,7 +91,8 @@ namespace audiotest.Core.AudioEngine
                         Channels[data.Note] = new NoteState
                         {
                             Event = new NoteEvent { Note = new Note(data.Note), Velocity = data.Velocity, Pressed = true },
-                            StartTime = clock.Time
+                            StartTime = clock.Time,
+                            InternalStartTime = clock.Time
                         };
                     }
                     break;
@@ -99,10 +101,15 @@ namespace audiotest.Core.AudioEngine
                     if (true)
                     {
                         NoteData data = e.GetNoteData();
+                        uint? oldStartTime = null;
+                        uint? oldInternalStartTime = null;
+                        if (Channels.TryGetValue(data.Note, out var channel)) oldStartTime = channel.StartTime;
+                        if (Channels.TryGetValue(data.Note, out var channel1)) oldInternalStartTime = channel1.InternalStartTime;
                         Channels[data.Note] = new NoteState
                         {
                             Event = new NoteEvent { Note = new Note(data.Note), Velocity = data.Velocity, Pressed = false },
-                            StartTime = clock.Time
+                            StartTime = oldStartTime ?? clock.Time,
+                            InternalStartTime = oldInternalStartTime ?? clock.Time
                         };
                     }
                     break;
@@ -123,7 +130,8 @@ namespace audiotest.Core.AudioEngine
                 Channels[e.Note.Number] = new NoteState
                 {
                     Event = e,
-                    StartTime = clock.Time
+                    StartTime = clock.Time,
+                    InternalStartTime = clock.Time
                 };
         }
 

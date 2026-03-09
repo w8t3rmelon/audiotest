@@ -55,7 +55,28 @@ namespace audiotest.Core.Instruments
 				{ "load", new InstrumentParameter(InstrumentParameterType.Invoke, "Load", LoadSampleFromParam) },
 
                 { "loop", new InstrumentParameter(InstrumentParameterType.Toggle, "Loop", false) },
+                { "lppt", new InstrumentParameter(InstrumentParameterType.Toggle, "Loop Points", false, true)},
+                { "lpst", new InstrumentParameter(InstrumentParameterType.Slider, "Loop Start", 0, 0, 0, 1, true)},
+                { "lpen", new InstrumentParameter(InstrumentParameterType.Slider, "Loop End", 0, 0, 0, 1, true)},
             };
+
+			Params["loop"].BoolChanged += enabled =>
+			{
+				Params["lppt"].Hidden = !enabled;
+				if (Params["lppt"].BoolValue)
+				{
+					Params["lpst"].Hidden = !enabled;
+					Params["lpen"].Hidden = !enabled;
+				}
+				TriggerParamsPanelRefresh();
+			};
+
+			Params["lppt"].BoolChanged += enabled =>
+			{
+				Params["lpst"].Hidden = !enabled;
+				Params["lpen"].Hidden = !enabled;
+				TriggerParamsPanelRefresh();
+			};
 		}
 
 		public SamplerInstrument(string path) : this()
@@ -107,6 +128,12 @@ namespace audiotest.Core.Instruments
                     _ => 0
                 };
 
+                Params["lpst"].DoubleValue = 0;
+                Params["lpst"].DoubleMax = _length;
+                
+                Params["lpen"].DoubleValue = _length;
+                Params["lpen"].DoubleMax = _length;
+
 				OS.Alert("sample loaded successfully!", "sampler");
 
 				Ready = true;
@@ -123,16 +150,31 @@ namespace audiotest.Core.Instruments
 				state.ToBeDestroyed = true;
 				return Vector2.Zero;
 			}
-
-			uint time = clock.Time - state.StartTime;
+			
 			double rate = (((state.Event.Note.Frequency * _stream.MixRate) / Tuning) / _stream.MixRate) * ((double)_stream.MixRate / (double)clock.SampleRate);
-			if (time < _length / rate && state.Event.Pressed)
-				return _processingFunction((uint)(time * rate)) * (state.Event.Velocity / 255f);
-			else if (Params["loop"].BoolValue)
+			
+			uint time = clock.Time - state.InternalStartTime;
+			
+			if (Params["loop"].BoolValue)
 			{
-				state.StartTime = clock.Time;
-				return Vector2.Zero;
-			} else
+				if (Params["lppt"].BoolValue)
+				{
+					if (time > Params["lpen"].DoubleValue / rate)
+						state.InternalStartTime = clock.Time - (uint)(Params["lpst"].DoubleValue / rate);
+				}
+				else if (time >= _length / rate)
+				{
+					state.InternalStartTime = clock.Time;
+				}
+			}
+
+			time = clock.Time - state.InternalStartTime;
+
+			if (time < _length / rate)
+			{
+				return _processingFunction((uint)(time * rate)) * (state.Event.Velocity / 255f);
+			}
+			else
 			{
 				state.ToBeDestroyed = true;
 				return Vector2.Zero;
