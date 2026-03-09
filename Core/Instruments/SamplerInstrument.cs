@@ -11,11 +11,11 @@ namespace audiotest.Core.Instruments
 	/// </summary>
 	public class SamplerInstrument : Instrument
 	{
-		private AudioStreamWav _stream;
-		private byte[] _data;
-
-		private Func<uint, Vector2> _processingFunction;
-		private int _length;
+		public AudioStreamWav Stream;
+		public byte[] SampleData;
+		public int SampleLength;
+		
+		public Func<uint, Vector2> ProcessingFunction;
 
 		private bool _disposed;
 
@@ -23,27 +23,27 @@ namespace audiotest.Core.Instruments
 
 		public Vector2 Read8BitMonoSample(uint index)
 		{
-			return Vector2.One * ((sbyte)_data[index] / 128.0f);
+			return Vector2.One * ((sbyte)SampleData[index] / 128.0f);
 		}
 		public Vector2 Read8BitStereoSample(uint index)
 		{
 			uint pos = index * 2;
 			return new Vector2(
-				((sbyte)_data[pos] / 128.0f),
-				((sbyte)_data[pos + 1] / 128.0f)
+				((sbyte)SampleData[pos] / 128.0f),
+				((sbyte)SampleData[pos + 1] / 128.0f)
 			);
 		}
 		public Vector2 Read16BitMonoSample(uint index)
 		{
 			uint pos = index * 2;
-			return Vector2.One * (BitConverter.ToInt16([_data[pos], _data[pos + 1]]) / 16384.0f);
+			return Vector2.One * (BitConverter.ToInt16([SampleData[pos], SampleData[pos + 1]]) / 16384.0f);
 		}
 		public Vector2 Read16BitStereoSample(uint index)
 		{
 			uint pos = index * 4;
 			return new Vector2(
-				(BitConverter.ToInt16([_data[pos], _data[pos + 1]]) / 16384.0f),
-				(BitConverter.ToInt16([_data[pos + 2], _data[pos + 3]]) / 16384.0f)
+				(BitConverter.ToInt16([SampleData[pos], SampleData[pos + 1]]) / 16384.0f),
+				(BitConverter.ToInt16([SampleData[pos + 2], SampleData[pos + 3]]) / 16384.0f)
 			);
 		}
 
@@ -81,20 +81,20 @@ namespace audiotest.Core.Instruments
 
 		public SamplerInstrument(string path) : this()
 		{
-			_stream = GD.Load<AudioStreamWav>(path);
-			_data = _stream.Data;
+			Stream = GD.Load<AudioStreamWav>(path);
+			SampleData = Stream.Data;
 
-			_processingFunction = _stream.Format switch
+			ProcessingFunction = Stream.Format switch
 			{
-				AudioStreamWav.FormatEnum.Format8Bits => _stream.Stereo ? Read8BitStereoSample : Read8BitMonoSample,
-				AudioStreamWav.FormatEnum.Format16Bits => _stream.Stereo ? Read16BitStereoSample : Read16BitMonoSample,
-				_ => throw new InvalidOperationException($"Stream format {_stream.Format} is unsupported..")
+				AudioStreamWav.FormatEnum.Format8Bits => Stream.Stereo ? Read8BitStereoSample : Read8BitMonoSample,
+				AudioStreamWav.FormatEnum.Format16Bits => Stream.Stereo ? Read16BitStereoSample : Read16BitMonoSample,
+				_ => throw new InvalidOperationException($"Stream format {Stream.Format} is unsupported..")
 			};
 
-			_length = _stream.Format switch
+			SampleLength = Stream.Format switch
 			{
-				AudioStreamWav.FormatEnum.Format8Bits => _stream.Stereo ? _data.Length / 2 : _data.Length,
-				AudioStreamWav.FormatEnum.Format16Bits => _stream.Stereo ? _data.Length / 4 : _data.Length / 2,
+				AudioStreamWav.FormatEnum.Format8Bits => Stream.Stereo ? SampleData.Length / 2 : SampleData.Length,
+				AudioStreamWav.FormatEnum.Format16Bits => Stream.Stereo ? SampleData.Length / 4 : SampleData.Length / 2,
 				_ => 0
 			};
 
@@ -111,28 +111,28 @@ namespace audiotest.Core.Instruments
                 byte[] data = new byte[file.Length];
                 file.Read(data, 0, (int)file.Length);
 
-                _stream = AudioStreamWav.LoadFromBuffer(data);
-                _data = _stream.Data;
+                Stream = AudioStreamWav.LoadFromBuffer(data);
+                SampleData = Stream.Data;
 
-                _processingFunction = _stream.Format switch
+                ProcessingFunction = Stream.Format switch
                 {
-                    AudioStreamWav.FormatEnum.Format8Bits => _stream.Stereo ? Read8BitStereoSample : Read8BitMonoSample,
-                    AudioStreamWav.FormatEnum.Format16Bits => _stream.Stereo ? Read16BitStereoSample : Read16BitMonoSample,
-                    _ => throw new InvalidOperationException($"Stream format {_stream.Format} is unsupported..")
+                    AudioStreamWav.FormatEnum.Format8Bits => Stream.Stereo ? Read8BitStereoSample : Read8BitMonoSample,
+                    AudioStreamWav.FormatEnum.Format16Bits => Stream.Stereo ? Read16BitStereoSample : Read16BitMonoSample,
+                    _ => throw new InvalidOperationException($"Stream format {Stream.Format} is unsupported..")
                 };
 
-                _length = _stream.Format switch
+                SampleLength = Stream.Format switch
                 {
-                    AudioStreamWav.FormatEnum.Format8Bits => _stream.Stereo ? _data.Length / 2 : _data.Length,
-                    AudioStreamWav.FormatEnum.Format16Bits => _stream.Stereo ? _data.Length / 4 : _data.Length / 2,
+                    AudioStreamWav.FormatEnum.Format8Bits => Stream.Stereo ? SampleData.Length / 2 : SampleData.Length,
+                    AudioStreamWav.FormatEnum.Format16Bits => Stream.Stereo ? SampleData.Length / 4 : SampleData.Length / 2,
                     _ => 0
                 };
 
                 Params["lpst"].DoubleValue = 0;
-                Params["lpst"].DoubleMax = _length;
+                Params["lpst"].DoubleMax = SampleLength;
                 
-                Params["lpen"].DoubleValue = _length;
-                Params["lpen"].DoubleMax = _length;
+                Params["lpen"].DoubleValue = SampleLength;
+                Params["lpen"].DoubleMax = SampleLength;
 
 				OS.Alert("sample loaded successfully!", "sampler");
 
@@ -151,7 +151,7 @@ namespace audiotest.Core.Instruments
 				return Vector2.Zero;
 			}
 			
-			double rate = (((state.Event.Note.Frequency * _stream.MixRate) / Tuning) / _stream.MixRate) * ((double)_stream.MixRate / (double)clock.SampleRate);
+			double rate = (((state.Event.Note.Frequency * Stream.MixRate) / Tuning) / Stream.MixRate) * ((double)Stream.MixRate / (double)clock.SampleRate);
 			
 			uint time = clock.Time - state.InternalStartTime;
 			
@@ -162,7 +162,7 @@ namespace audiotest.Core.Instruments
 					if (time > Params["lpen"].DoubleValue / rate)
 						state.InternalStartTime = clock.Time - (uint)(Params["lpst"].DoubleValue / rate);
 				}
-				else if (time >= _length / rate)
+				else if (time >= SampleLength / rate)
 				{
 					state.InternalStartTime = clock.Time;
 				}
@@ -170,9 +170,9 @@ namespace audiotest.Core.Instruments
 
 			time = clock.Time - state.InternalStartTime;
 
-			if (time < _length / rate)
+			if (time < SampleLength / rate)
 			{
-				return _processingFunction((uint)(time * rate)) * (state.Event.Velocity / 255f);
+				return ProcessingFunction((uint)(time * rate)) * (state.Event.Velocity / 255f);
 			}
 			else
 			{
@@ -187,12 +187,12 @@ namespace audiotest.Core.Instruments
 			{
 				if (disposing)
 				{
-					_stream.Dispose();
+					Stream.Dispose();
 				}
 
-				_length = 0;
-				_data = null;
-				_processingFunction = null;
+				SampleLength = 0;
+				SampleData = null;
+				ProcessingFunction = null;
 
 				_disposed = true;
 			}
