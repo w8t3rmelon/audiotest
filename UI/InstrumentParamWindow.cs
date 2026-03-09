@@ -147,7 +147,7 @@ namespace audiotest.UI
             LineEdit lineEdit = new LineEdit();
 
             lineEdit.PlaceholderText = parm.Name;
-            lineEdit.Text = parm.StringDefault;
+            lineEdit.Text = parm.StringValue;
 
             lineEdit.TextChanged += (text) => { parm.StringValue = text; };
 
