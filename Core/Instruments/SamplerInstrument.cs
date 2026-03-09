@@ -17,6 +17,8 @@ namespace audiotest.Core.Instruments
 		
 		public Func<uint, Vector2> ProcessingFunction;
 
+		public event Action SampleLoaded;
+
 		private bool _disposed;
 
 		public bool Ready;
@@ -99,6 +101,7 @@ namespace audiotest.Core.Instruments
 			};
 
 			Ready = true;
+			SampleLoaded?.Invoke();
 		}
 
 		public void LoadSampleFromParam()
@@ -134,9 +137,9 @@ namespace audiotest.Core.Instruments
                 Params["lpen"].DoubleValue = SampleLength;
                 Params["lpen"].DoubleMax = SampleLength;
 
-				OS.Alert("sample loaded successfully!", "sampler");
-
 				Ready = true;
+				SampleLoaded?.Invoke();
+				OS.Alert("sample loaded successfully!", "sampler");
             } catch (Exception e)
             {
                 OS.Alert($"error loading sample:\n{e}", "sampler");
