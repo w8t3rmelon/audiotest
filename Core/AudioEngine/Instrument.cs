@@ -26,6 +26,8 @@ namespace audiotest.Core.AudioEngine
 
         public Dictionary<string, InstrumentParameter> Params { get; init; }
 
+        public event Action ParamsPanelRefreshTriggered;
+
         public Dictionary<byte, NoteState> Channels = new Dictionary<byte, NoteState>();
         
         /*
@@ -44,6 +46,11 @@ namespace audiotest.Core.AudioEngine
         public Instrument()
         {
             Params = new();
+        }
+
+        public void TriggerParamsPanelRefresh()
+        {
+            ParamsPanelRefreshTriggered?.Invoke();
         }
 
         /*

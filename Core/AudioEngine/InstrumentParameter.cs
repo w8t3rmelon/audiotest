@@ -40,6 +40,18 @@ namespace audiotest.Core.AudioEngine
 			if (Type != InstrumentParameterType.Invoke)
 				throw new InvalidOperationException("Parameter type is not Invoke");
 		}
+		
+
+		public event Action<double> DoubleChanged;
+		public event Action<string> StringChanged;
+		public event Action<bool> BoolChanged;
+
+		public event Action UIRefreshTriggered;
+
+		public void TriggerUIRefresh()
+		{
+			UIRefreshTriggered?.Invoke();
+		}
 
 
 		public double DoubleValue
@@ -52,6 +64,7 @@ namespace audiotest.Core.AudioEngine
 			set
 			{
 				ThrowIfNotDoubleType();
+				DoubleChanged?.Invoke(value);
 				field = value;
 			}
 		}
@@ -121,6 +134,7 @@ namespace audiotest.Core.AudioEngine
 			{
 				ThrowIfNotStringType();
 				field = value;
+				StringChanged?.Invoke(value);
 			}
 		}
 		public string StringDefault
@@ -149,6 +163,7 @@ namespace audiotest.Core.AudioEngine
 			{
 				ThrowIfNotBoolType();
 				field = value;
+				BoolChanged?.Invoke(value);
 			}
 		}
 		public bool BoolDefault

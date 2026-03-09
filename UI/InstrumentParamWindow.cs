@@ -56,6 +56,15 @@ namespace audiotest.UI
                 parm.DoubleValue = val;
             };
 
+            parm.UIRefreshTriggered += () =>
+            {
+                label.Text = parm.Name;
+                slider.MinValue = parm.DoubleMin;
+                slider.MaxValue = parm.DoubleMax;
+                slider.Step = parm.DoubleStep;
+                slider.Value = parm.DoubleValue;
+            };
+
             container.AddChild(label);
             container.AddChild(slider);
             AddChild(container);
@@ -81,6 +90,15 @@ namespace audiotest.UI
             slider.ValueChanged += (val) =>
             {
                 parm.DoubleValue = val;
+            };
+
+            parm.UIRefreshTriggered += () =>
+            {
+                label.Text = parm.Name;
+                slider.MinValue = parm.DoubleMin;
+                slider.MaxValue = parm.DoubleMax;
+                slider.Step = parm.DoubleStep;
+                slider.Value = parm.DoubleValue;
             };
 
             container.AddChild(label);
@@ -111,6 +129,15 @@ namespace audiotest.UI
                 parm.DoubleValue = val;
             };
 
+            parm.UIRefreshTriggered += () =>
+            {
+                label.Text = parm.Name;
+                knob.MinValue = parm.DoubleMin;
+                knob.MaxValue = parm.DoubleMax;
+                knob.Step = parm.DoubleStep;
+                knob.Value = parm.DoubleValue;
+            };
+
             knob.AddChild(label);
             Knobs.AddChild(knob);
         }
@@ -123,6 +150,12 @@ namespace audiotest.UI
             lineEdit.Text = parm.StringDefault;
 
             lineEdit.TextChanged += (text) => { parm.StringValue = text; };
+
+            parm.UIRefreshTriggered += () =>
+            {
+                lineEdit.PlaceholderText = parm.Name;
+                lineEdit.Text = parm.StringValue;
+            };
 
             AddChild(lineEdit);
         }
@@ -190,6 +223,7 @@ namespace audiotest.UI
 
         public void Refresh()
         {
+            Instrument.ParamsPanelRefreshTriggered -= Refresh;
             foreach (var child in GetChildren())
                 RemoveChild(child);
 
@@ -198,6 +232,8 @@ namespace audiotest.UI
 
             MakeVolumeKnob(Instrument);
             MakeTuningKnob(Instrument);
+
+            Instrument.ParamsPanelRefreshTriggered += Refresh;
 
             foreach (KeyValuePair<string, InstrumentParameter> pair in Instrument.Params)
             {
