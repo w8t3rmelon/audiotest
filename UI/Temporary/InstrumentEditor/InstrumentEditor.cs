@@ -1,6 +1,7 @@
 using Godot;
 
 using audiotest.Core.AudioEngine;
+using audiotest.Core.Instruments;
 
 namespace audiotest.UI.Temporary.InstrumentEditor
 {
@@ -19,6 +20,14 @@ namespace audiotest.UI.Temporary.InstrumentEditor
 			{
                 Instrument.Envelope = envelope;
 			};
+			if (Instrument is SamplerInstrument sampler)
+			{
+				SampleLoopPointEditor loopPointEditor =
+					GD.Load<PackedScene>("res://UI/SampleLoopPointEditor.tscn").Instantiate<SampleLoopPointEditor>();
+				loopPointEditor.Name = "Loop Points";
+				loopPointEditor.Instrument = sampler;
+				GetNode<TabContainer>("Tabs").AddChild(loopPointEditor);
+			}
 		}
 
 		// Called every frame. 'delta' is the elapsed time since the previous frame.

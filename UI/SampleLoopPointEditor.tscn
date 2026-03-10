@@ -1,0 +1,262 @@
+[gd_scene format=3 uid="uid://dxsdoddcxmyli"]
+
+[ext_resource type="Script" uid="uid://c4kl7fxfibkmh" path="res://addons/extendedcontrols/SampleCuePoint.cs" id="1_asdrf"]
+[ext_resource type="Script" uid="uid://bgs5th4867fr2" path="res://UI/SampleLoopPointEditor.cs" id="1_yqp0x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fs8l"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqp0x"]
+bg_color = Color(0.17940721, 0.17940724, 0.17940721, 1)
+
+[node name="SampleLoopPointEditor" type="Panel" unique_id=1002221044 node_paths=PackedStringArray("StartPointSpinBox", "EndPointSpinBox", "WaveformContainer", "WaveformLoading", "StartCuePoint", "EndCuePoint")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3fs8l")
+script = ExtResource("1_yqp0x")
+StartPointSpinBox = NodePath("ControlsHolder/StartPointSpinBox")
+EndPointSpinBox = NodePath("ControlsHolder/EndPointSpinBox")
+WaveformContainer = NodePath("Holder/Waveform")
+WaveformLoading = NodePath("Holder/Waveform/LoadingText")
+StartCuePoint = NodePath("StartPoint")
+EndCuePoint = NodePath("EndPoint")
+
+[node name="Holder" type="Panel" parent="." unique_id=1592776795]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 32.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Waveform" type="TextureRect" parent="Holder" unique_id=2040428392]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="LoadingText" type="Label" parent="Holder/Waveform" unique_id=660823389]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Loading preview"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartPoint" type="Range" parent="." unique_id=1952408249]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 1
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+pivot_offset_ratio = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+focus_behavior_recursive = 0
+mouse_filter = 1
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = null
+theme_type_variation = &""
+min_value = 0.0
+max_value = 1.0
+step = 1.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = false
+allow_greater = false
+allow_lesser = false
+script = ExtResource("1_asdrf")
+PointColour = Color(1, 0, 0, 1)
+
+[node name="EndPoint" type="Range" parent="." unique_id=592871672]
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = -2.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 1
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+pivot_offset_ratio = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 0
+focus_behavior_recursive = 0
+mouse_filter = 1
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = null
+theme_type_variation = &""
+min_value = 0.0
+max_value = 1.0
+step = 1.0
+page = 0.0
+value = 1.0
+exp_edit = false
+rounded = false
+allow_greater = false
+allow_lesser = false
+script = ExtResource("1_asdrf")
+PointColour = Color(0, 1, 0, 1)
+
+[node name="ControlHolderBG" type="Panel" parent="." unique_id=886331329]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yqp0x")
+
+[node name="ControlsHolder" type="HBoxContainer" parent="." unique_id=1721908156]
+z_index = 2
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="ControlsHolder" unique_id=1237965076]
+layout_mode = 2
+text = "Loop Start"
+
+[node name="StartPointSpinBox" type="SpinBox" parent="ControlsHolder" unique_id=131939230]
+layout_mode = 2
+max_value = 1.0
+
+[node name="Label2" type="Label" parent="ControlsHolder" unique_id=713972448]
+layout_mode = 2
+text = "Loop End"
+
+[node name="EndPointSpinBox" type="SpinBox" parent="ControlsHolder" unique_id=1957491381]
+layout_mode = 2
+max_value = 1.0
+value = 1.0
