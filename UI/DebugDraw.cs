@@ -41,9 +41,13 @@ namespace audiotest.UI
                 for (int i = 0; i < MainController.Instance.Mixer.SampleProviders.Count; i++)
                 {
                     ISampleProvider provider = MainController.Instance.Mixer.SampleProviders[i];
-                    if (provider is Instrument)
+                    if (provider is Instrument inst)
                     {
-                        DrawText($"[{i}:Instrument] {((Instrument)provider).Name} ({provider.GetType().Name}) (EventQueue {((Instrument)provider).EventQueue.Count}, {((Instrument)provider).Channels.Count} Channels{(((Instrument)provider).EventQueue.Count > 0 ? $", Next event: {((Instrument)provider).EventQueue.First().Value})" : "")})");
+                        DrawText($"[{i}:Instrument] {inst.Name} ({provider.GetType().Name}) ({inst.Channels.Count} ch)");
+                        DrawText($"-- Envelope: {inst.Envelope.Attack}, {inst.Envelope.Decay}, {inst.Envelope.Sustain}, {inst.Envelope.Release}");
+                        DrawText($"-- Vol: {inst.Volume:0.00}, Tuning: A4 = {inst.Tuning:0.0}Hz");
+                        DrawText($"-- Patterns: {inst.Patterns.Count}");
+                        DrawText($"-- Pattern sequence: {string.Join(',', inst.PatternSequence)}");
                     }
                     else
                     {
