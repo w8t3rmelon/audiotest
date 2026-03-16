@@ -159,6 +159,36 @@ namespace audiotest.UI
 
             AddChild(lineEdit);
         }
+        
+        private void MakeFilePicker(InstrumentParameter parm)
+        {
+            HBoxContainer container = new HBoxContainer();
+            Button button = new Button();
+            Label label = new Label();
+            FileDialog filePicker = new FileDialog();
+            filePicker.UseNativeDialog = true;
+            filePicker.FileMode = FileDialog.FileModeEnum.OpenFile;
+            filePicker.FileSelected += (path) =>
+            {
+                parm.StringValue = path;
+            };
+
+            label.SizeFlagsHorizontal = SizeFlags.Expand;
+
+            label.Text = parm.Name;
+            label.VerticalAlignment = VerticalAlignment.Center;
+
+            button.Text = "Open...";
+            button.Pressed += () =>
+            {
+                filePicker.PopupCenteredClamped();
+            };
+
+            container.AddChild(label);
+            container.AddChild(button);
+            AddChild(container);
+            AddChild(filePicker);
+        }
 
         private void MakeInvoke(InstrumentParameter parm)
         {
@@ -251,6 +281,8 @@ namespace audiotest.UI
                     MakeString(pair.Value);
                 else if (pair.Value.Type == InstrumentParameterType.Invoke)
                     MakeInvoke(pair.Value);
+                else if (pair.Value.Type == InstrumentParameterType.FilePath)
+                    MakeFilePicker(pair.Value);
             }
         }
     }

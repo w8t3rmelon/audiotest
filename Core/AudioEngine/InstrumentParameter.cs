@@ -9,7 +9,8 @@ namespace audiotest.Core.AudioEngine
 		Spin,
 		Knob,
 		String,
-		Invoke
+		Invoke,
+		FilePath
 	}
 	public class InstrumentParameter
 	{
@@ -26,8 +27,8 @@ namespace audiotest.Core.AudioEngine
 
 		private void ThrowIfNotStringType()
 		{
-			if (Type != InstrumentParameterType.String)
-				throw new InvalidOperationException("Parameter type is not String");
+			if (Type != InstrumentParameterType.String && Type != InstrumentParameterType.FilePath)
+				throw new InvalidOperationException("Parameter type is not String or FilePath");
 		}
 
 		private void ThrowIfNotBoolType()
